@@ -1,0 +1,651 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration &mdash; Central Dogma 0.25.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Concepts" href="concepts.html" />
+    <link rel="prev" title="Installation" href="setup-installation.html" />
+  <script src="_static/center_page.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+   
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/central_dogma.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.25
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="setup.html">Setting up</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="setup-installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-properties">Core properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-replication">Configuring replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-tls">Configuring TLS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client-cli.html">Command-line client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client-java.html">Java client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirroring.html">Better configuration change workflow with Git-to-CD mirroring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Authentication and Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known-issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/releases">Release notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="apidocs/index.html#://">API documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="xref/index.html#://">Source cross-reference</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/issues?q=label%3Aquestion-answered">Questions and answers</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma">Fork me at GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/blob/master/CONTRIBUTING.md">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Central Dogma</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="setup.html">Setting up</a> &raquo;</li>
+        
+      <li>Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/line/centraldogma/blob/master/site/src/sphinx/setup-configuration.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuration">
+<span id="setup-configuration"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>The main configuration file is located at <tt class="docutils literal">conf/dogma.json</tt>, with most properties set to their sensible
+defaults:</p>
+<div class="highlight-json notranslate"><div class="highlight hljs"><pre class="json">{
+  &quot;dataDir&quot;: &quot;./data&quot;,
+  &quot;ports&quot;: [
+    {
+      &quot;localAddress&quot;: {
+        &quot;host&quot;: &quot;*&quot;,
+        &quot;port&quot;: 36462
+      },
+      &quot;protocols&quot;: [
+        &quot;http&quot;
+      ]
+    }
+  ],
+  &quot;tls&quot;: null,
+  &quot;numWorkers&quot;: null,
+  &quot;maxNumConnections&quot;: null,
+  &quot;requestTimeoutMillis&quot;: null,
+  &quot;idleTimeoutMillis&quot;: null,
+  &quot;maxFrameLength&quot;: null,
+  &quot;numRepositoryWorkers&quot;: 16,
+  &quot;repositoryCacheSpec&quot;: &quot;maximumWeight=134217728,expireAfterAccess=5m&quot;,
+  &quot;sessionCacheSpec&quot;: &quot;maximumSize=8192,expireAfterWrite=604800s&quot;,
+  &quot;webAppEnabled&quot;: true,
+  &quot;webAppSessionTimeoutMillis&quot;: 604800000,
+  &quot;gracefulShutdownTimeout&quot;: {
+    &quot;quietPeriodMillis&quot;: 1000,
+    &quot;timeoutMillis&quot;: 10000
+  },
+  &quot;replication&quot;: {
+    &quot;method&quot;: &quot;NONE&quot;
+  },
+  &quot;securityEnabled&quot;: false,
+  &quot;mirroringEnabled&quot;: true,
+  &quot;numMirroringThreads&quot;: null,
+  &quot;maxNumFilesPerMirror&quot;: null,
+  &quot;maxNumBytesPerMirror&quot;: null,
+  &quot;accessLogFormat&quot;: &quot;common&quot;,
+  &quot;administrators&quot;: [],
+  &quot;caseSensitiveLoginNames&quot;: false
+}</pre></div>
+</div>
+<div class="section" id="core-properties">
+<h2>Core properties<a class="headerlink" href="#core-properties" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><tt class="docutils literal">dataDir</tt> (string)<ul>
+<li>the path to the data directory which contains the repositories served by Central Dogma and
+other stateful data. Can be a relative path from the root directory of the distribution.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">ports</tt><ul>
+<li>the server ports that serve the incoming requests.</li>
+<li><tt class="docutils literal">localAddress</tt> - the bind address of server socket.<ul>
+<li><tt class="docutils literal">host</tt> (string)<ul>
+<li>the IP address or <tt class="docutils literal">*</tt> to bind to all network interfaces.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">port</tt> (integer)<ul>
+<li>the port number. 36462 is preferred.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><tt class="docutils literal">protocols</tt> (string array)<ul>
+<li>protocols which are served on the port. <tt class="docutils literal">http</tt>, <tt class="docutils literal">https</tt> and <tt class="docutils literal">proxy</tt> are supported.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><tt class="docutils literal">tls</tt><ul>
+<li>the configuration for Transport Layer Security(TLS) support. Specify <tt class="docutils literal">null</tt> to disable TLS.
+See <a class="reference internal" href="#tls"><span class="std std-ref">Configuring TLS</span></a> for more information.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">numWorkers</tt> (integer)<ul>
+<li>the number of I/O worker threads. If <tt class="docutils literal">null</tt>, the default value of <tt class="docutils literal"><numCpuCores> * 2</tt>
+is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">maxNumConnections</tt> (integer)<ul>
+<li>the maximum number of TCP/IP connections that can be handled concurrently.
+Any connection attempts that make the number of connections exceed this value will be rejected immediately.
+If <tt class="docutils literal">null</tt>, no limit is enforced.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">requestTimeoutMillis</tt> (integer)<ul>
+<li>the maximum number of milliseconds allowed for handling a request.
+If a request takes more than this, the server may respond with a <tt class="docutils literal">503 Service Unavailable</tt> response.
+If <tt class="docutils literal">null</tt>, the default value of ‘10000 milliseconds’ (10 seconds) is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">idleTimeoutMillis</tt> (integer)<ul>
+<li>the number of milliseconds before closing an idle connection.
+The server will close the connection if it stays idle for more than this without any pending requests.
+If <tt class="docutils literal">null</tt>, the default value of ‘15000 milliseconds’ (15 seconds) is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">maxFrameLength</tt> (integer)<ul>
+<li>the maximum length of request content. If a client sends a request whose content
+is longer than this, the server may respond with a <tt class="docutils literal">413 Request Entity Too Large</tt> response.
+If <tt class="docutils literal">null</tt>, the default value of ‘10485760 bytes’ (10 MiB) is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">numRepositoryWorkers</tt> (integer)<ul>
+<li>the number of worker threads dedicated to handling repository reads and writes.
+If <tt class="docutils literal">null</tt>, the default value of ‘16 threads’ is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">repositoryCacheSpec</tt> (string)<ul>
+<li>the cache specification string which determines the capacity and behavior of the repository
+access cache. Refer to <a class="reference external" href="https://static.javadoc.io/com.github.ben-manes.caffeine/caffeine/2.5.5/index.html?com/github/benmanes/caffeine/cache/CaffeineSpec.html">the Caffeine API documentation</a> for more information.
+Note that the weight of the cache has been tuned to be roughly proportional to its memory usage.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">sessionCacheSpec</tt> (string)<ul>
+<li>the cache specification string which determines the capacity and behavior of the cache for the session
+information of the server. Refer to <a class="reference external" href="https://static.javadoc.io/com.github.ben-manes.caffeine/caffeine/2.5.5/index.html?com/github/benmanes/caffeine/cache/CaffeineSpec.html">the Caffeine API documentation</a> for more information.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">webAppEnabled</tt> (boolean)<ul>
+<li>whether to enable the web-based administrative console. Enabled by default.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">webAppSessionTimeoutMillis</tt> (integer)<ul>
+<li>the session timeout for web-based administrative console, in milliseconds. If <tt class="docutils literal">null</tt>, the default value
+of ‘604800000 milliseconds’ (7 days) is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">gracefulShutdownTimeout</tt><ul>
+<li>the amount of time to wait after the initiation of shutdown procedure for requests to go away before
+the actual shutdown of the server.</li>
+<li><tt class="docutils literal">quietPeriodMillis</tt> (integer)<ul>
+<li>the number of milliseconds to wait for active requests to go end before shutting down.
+0 means the server will stop right away without waiting.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">timeoutMillis</tt> (integer)<ul>
+<li>the number of milliseconds to wait before shutting down the server regardless of active requests.
+This should be set to a time greater than <tt class="docutils literal">quietPeriodMillis</tt> to ensure the server shuts down
+even if there is a stuck request.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><tt class="docutils literal">replication</tt><ul>
+<li>the replication configuration.</li>
+<li><tt class="docutils literal">method</tt> (string)<ul>
+<li>the replication method. <tt class="docutils literal">NONE</tt> indicates ‘standalone mode’ without replication. See <a class="reference internal" href="#replication"><span class="std std-ref">Configuring replication</span></a>
+to learn how to configure ZooKeeper-based multi-master replication.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><tt class="docutils literal">securityEnabled</tt> (boolean)<ul>
+<li>whether to enable authentication. It’s disabled by default so that a user can play with Central Dogma
+without hassle. However, it is strongly encouraged to enable authentication because the authorship of
+a commit is filled in automatically based on the principal of the current user. Central Dogma uses
+<a class="reference external" href="https://shiro.apache.org/">Apache Shiro</a> as its authentication layer and uses the <tt class="docutils literal">conf/shiro.ini</tt> file as its security
+configuration. For more information about how to configure <a class="reference external" href="https://shiro.apache.org/">Apache Shiro</a>, read
+<a class="reference external" href="https://shiro.apache.org/configuration.html#ini-sections">this page</a> or check the example configuration
+files under the <tt class="docutils literal">conf/</tt> directory in the distribution.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">mirroringEnabled</tt> (boolean)<ul>
+<li>whether to enable Git-to-CD mirroring. It’s enabled by default. For more information about mirroring,
+refer to <a class="reference internal" href="mirroring.html#mirroring"><span class="std std-ref">Better configuration change workflow with Git-to-CD mirroring</span></a>.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">numMirroringThreads</tt> (integer)<ul>
+<li>the number of worker threads dedicated to periodic mirroring tasks. If <tt class="docutils literal">null</tt>, the default value of
+‘16 threads’ is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">maxNumFilesPerMirror</tt> (integer)<ul>
+<li>the maximum allowed number of files in a mirror. If a Git repository contains more files than this,
+Central Dogma will reject to mirror the Git repository. If <tt class="docutils literal">null</tt>, the default value of ‘8192 files’
+is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">maxNumBytesPerMirror</tt> (integer)<ul>
+<li>the maximum allowed number of bytes in a mirror. If the total size of the files in a Git repository exceeds
+this, Central Dogma will reject to mirror the Git repository. If <tt class="docutils literal">null</tt>, the default value of
+‘33554432 bytes’ (32 MiB) is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">accessLogFormat</tt> (string)<ul>
+<li>the format to be used for writing an access log. <tt class="docutils literal">common</tt> and <tt class="docutils literal">combined</tt> are pre-defined for NCSA
+common log format and NCSA combined log format, respectively. Also, a custom log format can be specified
+here. Read <a class="reference external" href="https://line.github.io/armeria/server-access-log.html">Writing an access log</a> for more
+information. Specify <tt class="docutils literal">null</tt> to disable access logging feature.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">administrators</tt> (string array)<ul>
+<li>login IDs of the administrators. They are valid only if <tt class="docutils literal">securityEnabled</tt> is <tt class="docutils literal">true</tt>.
+Please refer to <a class="reference internal" href="auth.html#auth"><span class="std std-ref">Authentication and Access Control</span></a> for more information.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">caseSensitiveLoginNames</tt> (boolean)<ul>
+<li>whether case-sensitive matching is performed when login names are compared. Disabled by default
+(case-insensitive).</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuring-replication">
+<span id="replication"></span><h2>Configuring replication<a class="headerlink" href="#configuring-replication" title="Permalink to this headline">¶</a></h2>
+<p>Central Dogma features multi-master replication based on <a class="reference external" href="https://zookeeper.apache.org/">Apache ZooKeeper</a>
+for high availability. A client can write to any of the available replicas, and thus it’s possible to update
+the settings of your application even when all replicas but one are down. The clients will automatically
+connect to an available replica.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Don’t have a working ZooKeeper cluster yet? Refer to
+<a class="reference external" href="http://zookeeper.apache.org/doc/r3.4.10/zookeeperAdmin.html">the ZooKeeper administrator’s guide</a>
+to set up one.</p>
+</div>
+<p>Once you have an access to a ZooKeeper cluster, update the <tt class="docutils literal">replication</tt> section of <tt class="docutils literal">conf/dogma.json</tt>:</p>
+<div class="highlight-json notranslate"><div class="highlight hljs"><pre class="json">{
+  &quot;dataDir&quot;: &quot;./data&quot;,
+  &quot;ports&quot;: [
+    {
+      &quot;localAddress&quot;: {
+        &quot;host&quot;: &quot;*&quot;,
+        &quot;port&quot;: 36462
+      },
+      &quot;protocols&quot;: [
+        &quot;http&quot;
+      ]
+    }
+  ],
+  &quot;tls&quot;: null,
+  &quot;numWorkers&quot;: null,
+  &quot;maxNumConnections&quot;: null,
+  &quot;requestTimeoutMillis&quot;: null,
+  &quot;idleTimeoutMillis&quot;: null,
+  &quot;maxFrameLength&quot;: null,
+  &quot;numRepositoryWorkers&quot;: 16,
+  &quot;repositoryCacheSpec&quot;: &quot;maximumWeight=134217728,expireAfterAccess=5m&quot;,
+  &quot;sessionCacheSpec&quot;: &quot;maximumSize=8192,expireAfterWrite=604800s&quot;,
+  &quot;webAppEnabled&quot;: true,
+  &quot;webAppSessionTimeoutMillis&quot;: 604800000,
+  &quot;gracefulShutdownTimeout&quot;: {
+    &quot;quietPeriodMillis&quot;: 1000,
+    &quot;timeoutMillis&quot;: 10000
+  },
+  &quot;replication&quot; : {
+    &quot;method&quot; : &quot;ZOOKEEPER&quot;,
+    &quot;connectionString&quot;: &quot;zk1.example.com:2181,zk2.example.com:2181,zk3.example.com:2181&quot;,
+    &quot;pathPrefix&quot;: &quot;/service/centraldogma&quot;,
+    &quot;timeoutMillis&quot;: null,
+    &quot;numWorkers&quot;: null,
+    &quot;maxLogCount&quot;: null,
+    &quot;minLogAgeMillis&quot;: null
+  },
+  &quot;securityEnabled&quot;: false,
+  &quot;accessLogFormat&quot;: &quot;common&quot;,
+  &quot;administrators&quot;: [],
+  &quot;caseSensitiveLoginNames&quot;: false
+}</pre></div>
+</div>
+<ul class="simple">
+<li><tt class="docutils literal">method</tt> (string)<ul>
+<li>the replication method. <tt class="docutils literal">ZOOKEEPER</tt> indicates ZooKeeper-based multi-master replication.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">connectionString</tt> (string)<ul>
+<li>the ZooKeeper connection string.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">pathPrefix</tt> (string)<ul>
+<li>the ZooKeeper path prefix. Central Dogma will create entries under this prefix.</li>
+<li>Be extra cautious so that two different Central Dogma clusters never use the same path prefix
+at the same ZooKeeper cluster.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">timeoutMillis</tt> (integer)<ul>
+<li>the ZooKeeper timeout, in milliseconds. If <tt class="docutils literal">null</tt>, the default value of ‘1000 milliseconds’ (1 second)
+is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">numWorkers</tt> (integer)<ul>
+<li>the number of worker threads dedicated for replication. If <tt class="docutils literal">null</tt>, the default value of ‘16 threads’
+is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">maxLogCount</tt> (integer)<ul>
+<li>the maximum number of log items to keep in ZooKeeper. Note that the log entries will still not be removed
+if they are younger than <tt class="docutils literal">minLogAgeMillis</tt>. If <tt class="docutils literal">null</tt>, the default value of ‘100 log entries’ is used.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">minLogAgeMillis</tt> (integer)<ul>
+<li>the minimum allowed age of log items before they are removed from ZooKeeper. If <tt class="docutils literal">null</tt> the default
+value of ‘3600000 milliseconds’ (1 hour) is used.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuring-tls">
+<span id="tls"></span><h2>Configuring TLS<a class="headerlink" href="#configuring-tls" title="Permalink to this headline">¶</a></h2>
+<p>Central Dogma supports TLS for its API and web pages. To enable TLS, a user may configure <tt class="docutils literal">tls</tt> property
+in <tt class="docutils literal">dogma.json</tt> as follows.</p>
+<div class="highlight-json notranslate"><div class="highlight hljs"><pre class="json">{
+  &quot;dataDir&quot;: &quot;./data&quot;,
+  &quot;ports&quot;: [
+    {
+      &quot;localAddress&quot;: {
+        &quot;host&quot;: &quot;*&quot;,
+        &quot;port&quot;: 36462
+      },
+      &quot;protocols&quot;: [
+        &quot;https&quot;
+      ]
+    }
+  ],
+  &quot;tls&quot;: {
+    &quot;keyCertChainFile&quot;: &quot;./cert/centraldogma.crt&quot;,
+    &quot;keyFile&quot;: &quot;./cert/centraldogma.key&quot;,
+    &quot;keyPassword&quot;: null
+  },
+  &quot;numWorkers&quot;: null,
+  &quot;maxNumConnections&quot;: null,
+  &quot;requestTimeoutMillis&quot;: null,
+  &quot;idleTimeoutMillis&quot;: null,
+  &quot;maxFrameLength&quot;: null,
+  &quot;numRepositoryWorkers&quot;: 16,
+  &quot;repositoryCacheSpec&quot;: &quot;maximumWeight=134217728,expireAfterAccess=5m&quot;,
+  &quot;sessionCacheSpec&quot;: &quot;maximumSize=8192,expireAfterWrite=604800s&quot;,
+  &quot;webAppEnabled&quot;: true,
+  &quot;gracefulShutdownTimeout&quot;: {
+    &quot;quietPeriodMillis&quot;: 1000,
+    &quot;timeoutMillis&quot;: 10000
+  },
+  &quot;replication&quot;: {
+    &quot;method&quot;: &quot;NONE&quot;
+  },
+  &quot;securityEnabled&quot;: false,
+  &quot;mirroringEnabled&quot;: true,
+  &quot;numMirroringThreads&quot;: null,
+  &quot;maxNumFilesPerMirror&quot;: null,
+  &quot;maxNumBytesPerMirror&quot;: null,
+  &quot;accessLogFormat&quot;: &quot;common&quot;,
+  &quot;administrators&quot;: [],
+  &quot;caseSensitiveLoginNames&quot;: false
+}</pre></div>
+</div>
+<ul class="simple">
+<li><tt class="docutils literal">tls</tt><ul>
+<li>the configuration for TLS support. It will be applied to the port which is configured with <tt class="docutils literal">https</tt>
+protocol. If <tt class="docutils literal">null</tt>, a self-signed certificate will be generated for <tt class="docutils literal">https</tt> protocol.</li>
+<li><tt class="docutils literal">keyCertChainFile</tt> (string)<ul>
+<li>the path to the certificate chain file.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">keyFile</tt> (string)<ul>
+<li>the path to the private key file.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">keyPassword</tt> (string)<ul>
+<li>the password of the private key file. Specify <tt class="docutils literal">null</tt> if no password is set. Note that <tt class="docutils literal">null</tt>
+(no password) and <tt class="docutils literal">"null"</tt> (password is ‘null’) are different.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>If you run your Central Dogma with TLS, you need to enable TLS of your <tt class="docutils literal">CentralDogma</tt> client instance.
+You can get it by <tt class="docutils literal">CentralDogma.forTlsHost()</tt> methods.</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">CentralDogma dogma = CentralDogma.forTlsHost(&quot;centraldogma.example.com&quot;, 36462);</pre></div>
+</div>
+<p>Also, <tt class="docutils literal">CentralDogmaBuilder</tt> provides <tt class="docutils literal">useTls()</tt> method.</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">CentralDogma dogma = new CentralDogmaBuilder().host(&quot;centraldogma.example.com&quot;, 36462)
+                                              .useTls()
+                                              .build();</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="concepts.html" class="btn btn-neutral float-right" title="Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup-installation.html" class="btn btn-neutral" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, LINE Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.25.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+  <div class="github-fork-ribbon-wrapper right">
+    <div class="github-fork-ribbon">
+      <a href="https://github.com/line/centraldogma">Fork me at GitHub</a>
+    </div>
+  </div>
+  <script type="text/javascript" src="_static/add_badges.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.3.0/highlightjs-line-numbers.min.js"></script>
+  <script>
+    document.querySelectorAll('div.hljs > pre').forEach(function(block) {
+      hljs.highlightBlock(block);
+      hljs.lineNumbersBlock(block);
+    });
+  </script>
+   
+
+
+</body>
+</html>

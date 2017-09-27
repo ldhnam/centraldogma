@@ -1,0 +1,10 @@
+com.linecorp.centraldogma.client
+com.linecorp.centraldogma.client.armeria
+com.linecorp.centraldogma.client.armeria.legacy
+com.linecorp.centraldogma.client.spring
+com.linecorp.centraldogma.client.updater
+com.linecorp.centraldogma.common
+com.linecorp.centraldogma.common.util
+com.linecorp.centraldogma.server
+com.linecorp.centraldogma.server.support.shiro
+com.linecorp.centraldogma.testing

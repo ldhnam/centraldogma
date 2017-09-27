@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Java client library &mdash; Central Dogma 0.25.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Better configuration change workflow with Git-to-CD mirroring" href="mirroring.html" />
+    <link rel="prev" title="Command-line client" href="client-cli.html" />
+  <script src="_static/center_page.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+   
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/central_dogma.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.25
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setting up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client-cli.html">Command-line client</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Java client library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#adding-centraldogma-client-as-a-dependency">Adding <tt class="docutils literal">centraldogma-client</tt> as a dependency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-client">Creating a client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-a-file">Getting a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pushing-a-commit">Pushing a commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#watching-a-file">Watching a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-multiple-hosts">Specifying multiple hosts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-client-profiles">Using client profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spring-boot-integration">Spring Boot integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-the-javadoc">Read the Javadoc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mirroring.html">Better configuration change workflow with Git-to-CD mirroring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Authentication and Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known-issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/releases">Release notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="apidocs/index.html#://">API documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="xref/index.html#://">Source cross-reference</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/issues?q=label%3Aquestion-answered">Questions and answers</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma">Fork me at GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/blob/master/CONTRIBUTING.md">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Central Dogma</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Java client library</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/line/centraldogma/blob/master/site/src/sphinx/client-java.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="java-client-library">
+<span id="client-java"></span><h1>Java client library<a class="headerlink" href="#java-client-library" title="Permalink to this headline">¶</a></h1>
+<p>The Java client library is the first class client implementation that provides the access to all operations
+exposed by a Central Dogma server.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Keep <a class="reference external" href="apidocs/index.html">the API documentation</a> open in another browser tab. You’ll find it to be a very useful companion.</p>
+</div>
+<div class="section" id="adding-centraldogma-client-as-a-dependency">
+<h2>Adding <tt class="docutils literal">centraldogma-client</tt> as a dependency<a class="headerlink" href="#adding-centraldogma-client-as-a-dependency" title="Permalink to this headline">¶</a></h2>
+<p>Gradle:</p>
+<div class="highlight hljs"><pre class="groovy">...
+dependencies {
+    ...
+    compile &#x27;com.linecorp.centraldogma:centraldogma-client-armeria-legacy:0.25.0&#x27;
+    ...
+}
+...</pre></div>
+<p>Maven:</p>
+<div class="highlight hljs"><pre class="xml">...
+&lt;dependencies&gt;
+  ...
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.linecorp.centraldogma&lt;/groupId&gt;
+    &lt;artifactId&gt;centraldogma-client-armeria-legacy&lt;/artifactId&gt;
+    &lt;version&gt;0.25.0&lt;/version&gt;
+  &lt;/dependency&gt;
+  ...
+&lt;/dependencies&gt;
+...</pre></div>
+</div>
+<div class="section" id="creating-a-client">
+<h2>Creating a client<a class="headerlink" href="#creating-a-client" title="Permalink to this headline">¶</a></h2>
+<p>First, we should create a new instance of <code class="code api-reference docutils literal javadoc"><a class="code api-reference reference external javadoc" href="apidocs/index.html?com/linecorp/centraldogma/client/CentralDogma.html">CentralDogma</a></code>:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import com.linecorp.centraldogma.client.CentralDogma;
+import com.linecorp.centraldogma.client.armeria.legacy.LegacyCentralDogmaBuilder;
+
+// The default port 36462 is used if unspecified.
+CentralDogma dogma = new LegacyCentralDogmaBuilder()
+        .host(&quot;127.0.0.1&quot;)
+        .build();
+// You can specify an alternative port as well:
+CentralDogma dogma2 = new LegacyCentralDogmaBuilder()
+        .host(&quot;example.com&quot;, 8888);
+        .build();</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Internally, the client uses <a class="reference external" href="https://line.github.io/armeria/">Armeria</a> as its networking layer. You may want to customize the client
+settings, such as specifying alternative Armeria <tt class="docutils literal">ClientFactory</tt> or configuring Armeria <tt class="docutils literal">ClientBuilder</tt>.</p>
+</div>
+</div>
+<div class="section" id="getting-a-file">
+<h2>Getting a file<a class="headerlink" href="#getting-a-file" title="Permalink to this headline">¶</a></h2>
+<p>Once a client is created, you can get a file from a repository:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import java.util.concurrent.CompletableFuture;
+import com.linecorp.centraldogma.common.Entry;
+import com.linecorp.centraldogma.common.EntryType;
+import com.linecorp.centraldogma.common.Revision;
+import com.linecorp.centraldogma.common.Query;
+
+CentralDogma dogma = ...;
+CompletableFuture&lt;Entry&lt;String&gt;&gt; future =
+        dogma.getFile(&quot;myProj&quot;, &quot;myRepo&quot;, Revision.HEAD, Query.ofText(&quot;/a.txt&quot;));
+
+Entry&lt;String&gt; entry = future.join();
+assert entry.type() == EntryType.TEXT
+assert entry.content() instanceof String; // Text file&#x27;s content type is String.
+System.err.println(entry.content());</pre></div>
+</div>
+<p>The <tt class="docutils literal">getFile()</tt> call above will fetch the latest revision of <tt class="docutils literal">/a.txt</tt> because we specified <tt class="docutils literal">Revision.HEAD</tt>
+which is equal to <tt class="docutils literal">new Revision(-1)</tt>. If you want to fetch a specific revision, you can specify the revision
+you desire. e.g. <tt class="docutils literal">new Revision(42)</tt> or <tt class="docutils literal">new Revision(-7)</tt></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not sure what the meaning of a negative revision number is? Read <a class="reference internal" href="concepts.html#concepts"><span class="std std-ref">Concepts</span></a>.</p>
+</div>
+<p>Note that we used <tt class="docutils literal">Query.ofText()</tt>, which tells Central Dogma to fetch the textual content. For a JSON file,
+you need to use <tt class="docutils literal">Query.ofJson()</tt>:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import com.fasterxml.jackson.databind.JsonNode;
+
+CentralDogma dogma = ...;
+CompletableFuture&lt;Entry&lt;JsonNode&gt;&gt; future =
+        dogma.getFile(&quot;myProj&quot;, &quot;myRepo&quot;, Revision.HEAD, Query.ofJson(&quot;/b.json&quot;));</pre></div>
+</div>
+<p>Did you notice the return type changed slightly? The type parameter of <tt class="docutils literal">Entry</tt> is not <tt class="docutils literal">String</tt> anymore but
+<tt class="docutils literal">JsonNode</tt> (from <a class="reference external" href="https://github.com/FasterXML/jackson">Jackson</a>), because we know we are fetching a JSON
+file.</p>
+<p>Alternatively, you can use <tt class="docutils literal">Query.ofJsonPath()</tt> to retrieve the result of JSON path evaluation instead of
+the whole content, which would be useful especially when you are interested only in a certain part of a
+large JSON file:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">CentralDogma dogma = ...;
+CompletableFuture&lt;Entry&lt;JsonNode&gt;&gt; future =
+        dogma.getFile(&quot;myProj&quot;, &quot;myRepo&quot;, Revision.HEAD,
+                      Query.ofJsonPath(&quot;/b.json&quot;, &quot;$.someValue&quot;));</pre></div>
+</div>
+<p>Central Dogma server will apply the JSON path expression <tt class="docutils literal">$.someValue</tt> to the content of <tt class="docutils literal">/b.json</tt>
+and return the query result to the client. For example, if <tt class="docutils literal">/b.json</tt> contains the following:</p>
+<div class="highlight-json notranslate"><div class="highlight hljs"><pre class="json">{ &quot;someValue&quot;: 42, &quot;otherValue&quot;: &quot;foo&quot; }</pre></div>
+</div>
+<p>You would get:</p>
+<div class="highlight-json notranslate"><div class="highlight hljs"><pre class="json">42</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Central Dogma uses <a class="reference external" href="https://github.com/json-path/JsonPath">Jayway’s JSON path implementation</a>.
+Refer to their project page for syntax, example and the list of supported functions.</p>
+</div>
+</div>
+<div class="section" id="pushing-a-commit">
+<h2>Pushing a commit<a class="headerlink" href="#pushing-a-commit" title="Permalink to this headline">¶</a></h2>
+<p>You can also push a commit into a repository programmatically:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import com.linecorp.centraldogma.common.Change;
+import com.linecorp.centraldogma.common.Commit;
+
+CentralDogma dogma = ...;
+CompletableFuture&lt;Commit&gt; future =
+        dogma.push(&quot;myProj&quot;, &quot;myRepo&quot;, Revision.HEAD,
+                   &quot;Add /c.json and remove /b.json&quot;,
+                   Change.ofUpsert(&quot;/c.json&quot;, &quot;{ \&quot;foo\&quot;: \&quot;bar\&quot; }&quot;),
+                   Change.ofRemoval(&quot;/b.json&quot;));
+
+Commit commit = future.join();
+System.err.println(&quot;Pushed a commit &quot; + commit.revision() + &quot; at &quot; + commit.whenAsText());</pre></div>
+</div>
+<p>In this example, we pushed a commit that contains two changes: one that adds <tt class="docutils literal">/c.json</tt> and the other that
+removes <tt class="docutils literal">/b.json</tt>.</p>
+<p>Note that we specified <tt class="docutils literal">Revision.HEAD</tt> as the base revision. It means this commit is against the latest
+commit in the repository <tt class="docutils literal">myRepo</tt>. Alternatively, you can specify an absolute revision so that you are
+absolutely sure that nobody pushed a commit while you prepare yours: (pun intended 😉)</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import java.util.concurrent.CompletionException;
+
+CentralDogma dogma = ...;
+CompletableFuture&lt;Commit&gt; future = dogma.push(..., new Revision(3), ...);
+try {
+    future.join();
+} catch (CompletionException e) {
+    Throwable cause = e.getCause();
+    if (cause instanceof ChangeConflictException) {
+        // Somebody pushed a commit newer than revision 3 or
+        // our changes cannot be applied to the revision 3 cleanly.
+    }
+}</pre></div>
+</div>
+</div>
+<div class="section" id="watching-a-file">
+<h2>Watching a file<a class="headerlink" href="#watching-a-file" title="Permalink to this headline">¶</a></h2>
+<p>Some configuration properties are dynamic. They are changed often and they must be applied without restarting
+the process. The client library provides an easy way to watch a file:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import com.linecorp.centraldogma.client.Latest;
+import com.linecorp.centraldogma.client.Watcher;
+
+CentralDogma dogma = ...;
+Watcher&lt;JsonNode&gt; watcher = dogma.fileWatcher(&quot;myProj&quot;, &quot;myRepo&quot;,
+                                              Query.ofJsonPath(&quot;/some_file.json&quot;, &quot;$.foo&quot;));
+// Register a callback for changes.
+watcher.watch((revision, value) -&gt; {
+    System.err.println(&quot;Foo has been updated to &quot; + value + &quot; (revision: &quot; + revision + &#x27;)&#x27;);
+});
+
+// Alternatively, without using a callback:
+watcher.awaitInitialValue();                // Wait until the initial value is available.
+Latest&lt;JsonNode&gt; latest = watcher.latest(); // Get the latest value.
+System.err.println(&quot;Current foo: &quot; + latest.value() + &quot; (revision: &quot; + latest.revision() + &#x27;)&#x27;);</pre></div>
+</div>
+<p>You would want to register a callback to the <tt class="docutils literal">Watcher</tt> or check the return value of <tt class="docutils literal">Watcher.latest()</tt>
+periodically to apply the new settings to your application.</p>
+</div>
+<div class="section" id="specifying-multiple-hosts">
+<h2>Specifying multiple hosts<a class="headerlink" href="#specifying-multiple-hosts" title="Permalink to this headline">¶</a></h2>
+<p>You can also specify more than one host using the <tt class="docutils literal">host()</tt> method:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import com.linecorp.centraldogma.client.armeria.legacy.LegacyCentralDogmaBuilder;
+
+LegacyCentralDogmaBuilder builder = new LegacyCentralDogmaBuilder();
+// The default port 36462 is used if unspecified.
+builder.host(&quot;replica1.example.com&quot;);
+// You can specify an alternative port number.
+builder.host(&quot;replica2.example.com&quot;, 1234);
+CentralDogma dogma = builder.build();</pre></div>
+</div>
+</div>
+<div class="section" id="using-client-profiles">
+<span id="id1"></span><h2>Using client profiles<a class="headerlink" href="#using-client-profiles" title="Permalink to this headline">¶</a></h2>
+<p>You can load the list of the Central Dogma servers from <tt class="docutils literal">.properties</tt> resource file in the class path using
+<tt class="docutils literal">LegacyCentralDogmaBuilder.profile()</tt>:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">LegacyCentralDogmaBuilder builder = new LegacyCentralDogmaBuilder();
+// Loads the host list from /centraldogma-profile-beta.properties.
+builder.profile(&quot;beta&quot;);
+CentralDogma dogma = builder.build();</pre></div>
+</div>
+<p>The resource path of the <tt class="docutils literal">.properties</tt> file is <tt class="docutils literal">/centraldogma-profile-<profile_name>.properties</tt> and its
+content looks like the following:</p>
+<div class="highlight-properties notranslate"><div class="highlight hljs"><pre class="properties"># The default port 36462 is used if unspecified.
+centraldogma.hosts.0=replica1.beta.example.com
+# You can specify an alternative port number.
+centraldogma.hosts.1=replica2.beta.example.com:1234</pre></div>
+</div>
+<p>You may want to archive this file into a JAR file and distribute it via a Maven repository, so that your users
+gets the up-to-date host list easily. For example, a user could put <tt class="docutils literal">centraldogma-profiles-1.0.jar</tt> into his
+or her class path:</p>
+<div class="highlight-default notranslate"><pre class="literal-block">$ cat centraldogma-profile-beta.properties
+centraldogma.host.0=...
+...
+$ cat centraldogma-profile-staging.properties
+centraldogma.host.0=...
+...
+$ cat centraldogma-profile-release.properties
+centraldogma.host.0=...
+...
+$ jar cvf centraldogma-profiles-1.0.jar centraldogma-profile-*.properties
+added manifest
+adding: centraldogma-profile-beta.properties
+adding: centraldogma-profile-staging.properties
+adding: centraldogma-profile-release.properties</pre>
+</div>
+</div>
+<div class="section" id="spring-boot-integration">
+<h2>Spring Boot integration<a class="headerlink" href="#spring-boot-integration" title="Permalink to this headline">¶</a></h2>
+<p>If you are using <a class="reference external" href="https://spring.io/">Spring Framework</a>, you can inject <code class="code api-reference docutils literal javadoc"><a class="code api-reference reference external javadoc" href="apidocs/index.html?com/linecorp/centraldogma/client/CentralDogma.html">CentralDogma</a></code>
+client very easily.</p>
+<ol class="arabic simple">
+<li>Add <tt class="docutils literal">centraldogma-client-spring-boot-autoconfigure</tt> into your dependencies.</li>
+<li>Add the client profile to your class path, as described in <a class="reference internal" href="#using-client-profiles"><span class="std std-ref">Using client profiles</span></a>.</li>
+</ol>
+<p>A new <code class="code api-reference docutils literal javadoc"><a class="code api-reference reference external javadoc" href="apidocs/index.html?com/linecorp/centraldogma/client/CentralDogma.html">CentralDogma</a></code> client will be created and injected using your
+<a class="reference external" href="https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html">Spring Boot profile</a>.
+When more than one profile is active, the first matching one will be used. For example,
+<tt class="docutils literal">/centraldogma-profile-dev.properties</tt> will be tried first and then <tt class="docutils literal">/centraldogma-profile-hsqldb.properties</tt>
+if your active Spring Boot profiles are <tt class="docutils literal">dev</tt> and <tt class="docutils literal">hsqldb</tt>.</p>
+<p>Once configured correctly, you would be able to run an application like the following:</p>
+<div class="highlight-java notranslate"><div class="highlight hljs"><pre class="java">import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.linecorp.centraldogma.client.CentralDogma;
+
+@SpringBootApplication
+public class MyApp {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MyApp.class, args);
+    }
+
+    // CentralDogma is injected automatically by CentralDogmaConfiguration.
+    @Bean
+    public CommandLineRunner commandLineRunner(CentralDogma dogma) {
+        return args -&gt; {
+            System.err.println(dogma.listProjects().join());
+        };
+    }
+}</pre></div>
+</div>
+</div>
+<div class="section" id="read-the-javadoc">
+<h2>Read the Javadoc<a class="headerlink" href="#read-the-javadoc" title="Permalink to this headline">¶</a></h2>
+<p>Refer to <a class="reference external" href="apidocs/index.html?com/linecorp/centraldogma/client/CentralDogma.html">the API documentation of ‘CentralDogma’ interface</a>
+for the complete list of operations you can perform with a Central Dogma server, which should be definitely
+much more than what this tutorial covers, such as fetching and watching multiple files.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mirroring.html" class="btn btn-neutral float-right" title="Better configuration change workflow with Git-to-CD mirroring" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="client-cli.html" class="btn btn-neutral" title="Command-line client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, LINE Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.25.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+  <div class="github-fork-ribbon-wrapper right">
+    <div class="github-fork-ribbon">
+      <a href="https://github.com/line/centraldogma">Fork me at GitHub</a>
+    </div>
+  </div>
+  <script type="text/javascript" src="_static/add_badges.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.3.0/highlightjs-line-numbers.min.js"></script>
+  <script>
+    document.querySelectorAll('div.hljs > pre').forEach(function(block) {
+      hljs.highlightBlock(block);
+      hljs.lineNumbersBlock(block);
+    });
+  </script>
+   
+
+
+</body>
+</html>

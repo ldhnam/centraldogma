@@ -1,0 +1,388 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Authentication and Access Control &mdash; Central Dogma 0.25.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Known issues" href="known-issues.html" />
+    <link rel="prev" title="Better configuration change workflow with Git-to-CD mirroring" href="mirroring.html" />
+  <script src="_static/center_page.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+   
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/central_dogma.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.25
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setting up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client-cli.html">Command-line client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client-java.html">Java client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirroring.html">Better configuration change workflow with Git-to-CD mirroring</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Authentication and Access Control</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#access-control">Access Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#application-token">Application Token</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="known-issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/releases">Release notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="apidocs/index.html#://">API documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="xref/index.html#://">Source cross-reference</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/issues?q=label%3Aquestion-answered">Questions and answers</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma">Fork me at GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/blob/master/CONTRIBUTING.md">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Central Dogma</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Authentication and Access Control</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/line/centraldogma/blob/master/site/src/sphinx/auth.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="authentication-and-access-control">
+<span id="auth"></span><h1>Authentication and Access Control<a class="headerlink" href="#authentication-and-access-control" title="Permalink to this headline">¶</a></h1>
+<p>Central Dogma provides the features for authentication and access control.</p>
+<div class="section" id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>For authentication, <a class="reference external" href="https://shiro.apache.org/">Apache Shiro</a> is used as its authentication layer and <tt class="docutils literal">conf/shiro.ini</tt> file is used
+as its security configuration. Please follow the steps below to turn on the security system of Central Dogma.</p>
+<p>First, enable the security system by configuring <tt class="docutils literal">conf/dogma.json</tt>. Specify login IDs of the administrators
+there, too:</p>
+<div class="highlight-javascript notranslate"><div class="highlight hljs"><pre class="javascript">{
+    ...
+    &quot;securityEnabled&quot;: true,
+    &quot;administrators&quot;: [
+        &quot;system-admin&quot;, &quot;dogma-admin&quot;
+    ]
+    ...
+}</pre></div>
+</div>
+<p>Next, configure <tt class="docutils literal">conf/shiro.ini</tt> based on your authentication system. A local database system of
+<a class="reference external" href="https://shiro.apache.org/">Apache Shiro</a> is used here to show you a simple example:</p>
+<div class="highlight-ini notranslate"><div class="highlight hljs"><pre class="ini">[users]
+system-admin = system-admin-secret
+dogma-admin = dogma-admin-secret</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="https://shiro.apache.org/">Apache Shiro</a> supports RDBMS or LDAP based security system as well. You can find the example
+configuration files under the <tt class="docutils literal">conf/</tt> directory in the distribution.</p>
+</div>
+<p>That’s all. Now, you are ready to use the security system of Central Dogma.</p>
+</div>
+<div class="section" id="access-control">
+<h2>Access Control<a class="headerlink" href="#access-control" title="Permalink to this headline">¶</a></h2>
+<p>One way to configure the access control system for Central Dogma is to use the web UI.
+To open the web UI, you may access <tt class="docutils literal">http://{your-central-dogma-domain-or-ip}:36462</tt> in your web browser.
+You may configure a project with HTTP APIs, but we recommend the web UI because it is easier and simpler.</p>
+<p>Everyone who is logged in is able to create a new project, and he or she would be an owner of the project.
+If you have the right to configure a project, in other words, if you are an owner of the project,
+you can access the configuration UI of the project by clicking the cog icon which is shown on the right
+of the project name.</p>
+<img alt="_images/auth_1.png" src="_images/auth_1.png" />
+<p>If you click the icon, you can see the configuration UI for a project like below. In this page, you can
+add a user or a token as a member of the project and can also remove them from the project.</p>
+<img alt="_images/auth_2.png" src="_images/auth_2.png" />
+<p>When you add a user as a member of the project, you need to choose the role of the member.
+There are 4 user role types in the access control system of Central Dogma, but you can choose one
+of <tt class="docutils literal">Owner</tt> and <tt class="docutils literal">Member</tt> role in the UI. More information about the role is as follows.</p>
+<ul class="simple">
+<li><tt class="docutils literal">Administrator</tt><ul>
+<li>the user that all permissions are assigned to, a.k.a ‘super user’. Only an administrator can restore
+removed project. The administrators can be configured in <tt class="docutils literal">conf/dogma.json</tt> as described the above.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">Owner</tt> of a project<ul>
+<li>the administrator of a project. A user who creates a project is to be an owner of the project by
+default. Owners can add a user or a token as an owner or a member of the project, and can create
+a new repository. Also, they can remove the repository or the project from the system and can
+configure permissions for each role, member and token.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">Member</tt> of a project<ul>
+<li>users who can see the configuration of a project, but members are not allowed to change the configuration.</li>
+</ul>
+</li>
+<li><tt class="docutils literal">Guest</tt> of a project<ul>
+<li>users who is logged in but is neither an owner nor a member of a project. Guests are not allowed to see
+the configuration of a project.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Do not forget to make a new <tt class="docutils literal">Application Token</tt> before adding a token to a project. <tt class="docutils literal">Add a token</tt>
+button would be disabled if there is no token. The cog icon on the right of the <tt class="docutils literal">Tokens</tt> title
+brings you to the <tt class="docutils literal">Application Token</tt> management page.</p>
+</div>
+<p>You can see the configuration UI for a repository when you click the name of repository in the
+<tt class="docutils literal">Repository Permission</tt> list. The following image shows the configuration of the repository called <tt class="docutils literal">main</tt>.
+In this page, you can do the followings.</p>
+<ul class="simple">
+<li>Changing the role of a member or a token in a project</li>
+<li>Setting permissions of each role for a repository</li>
+<li>Setting permissions of a specific member or token for a repository</li>
+</ul>
+<img alt="_images/auth_3.png" src="_images/auth_3.png" />
+<p>Permissions can be specified for a repository only. So a user can configure their repositories with different
+access control levels. There are only two permission types currently, which are <tt class="docutils literal">READ</tt> and <tt class="docutils literal">WRITE</tt>.
+<tt class="docutils literal">WRITE</tt> permission implies <tt class="docutils literal">READ</tt> permission, so you cannot give only WRITE permission to a user,
+a token or any role.</p>
+<p>Every access of HTTP API will be controlled by the access control system. A request is allowed only if the
+user of the request has sufficient permissions. If permissions for the user are specified in the repository
+configuration, it would be used first to control the request. If it does not exist, permissions for each role
+of the repository would be used to do that.</p>
+<div class="section" id="application-token">
+<h3>Application Token<a class="headerlink" href="#application-token" title="Permalink to this headline">¶</a></h3>
+<p>When a user uses the web UI, he or she should login first to get a token for a new web session. But what
+should a user do when he or she uses one of Central Dogma clients? The user may log in to a Central Dogma
+server via HTTP API and get a session token. But it is inconvenient and the user may write more complicated
+code because the user should log in again when the session token is expired. <tt class="docutils literal">Application Token</tt> would be
+useful for this case.</p>
+<p><tt class="docutils literal">Application Token</tt> is like a virtual user, so it can have any role in a project. Also, its permissions
+can be specified in a repository configuration like a member. To get a new token, a user can use
+<tt class="docutils literal">Application Tokens</tt> menu of the web UI. <tt class="docutils literal">Application ID</tt> has to be unique to identify where a client
+request comes from.</p>
+<img alt="_images/auth_4.png" src="_images/auth_4.png" />
+<p>Anyone who is logged into the Central Dogma can create a new <tt class="docutils literal">Application Token</tt>, and the token is shared
+for everyone. So any owner of a project can add any token to their project. However only both the token
+creator and the administrator are allowed to deactivate and/or remove the token.</p>
+<p>There are two levels of a token, which are <tt class="docutils literal">Admin</tt> and <tt class="docutils literal">User</tt>. <tt class="docutils literal">Admin</tt> level token can be created by
+only the administrators. A client who sends a request with the token is allowed to access administrator-level
+APIs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Java client library is not under the access control system for now. Currently it accesses Central Dogma
+via Thrift API but would replace its underlying API requests with HTTP API soon. After that, it would be
+under the access control system and you can use <tt class="docutils literal">Application Token</tt> to control the accesses from a user.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="known-issues.html" class="btn btn-neutral float-right" title="Known issues" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mirroring.html" class="btn btn-neutral" title="Better configuration change workflow with Git-to-CD mirroring" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, LINE Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.25.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+  <div class="github-fork-ribbon-wrapper right">
+    <div class="github-fork-ribbon">
+      <a href="https://github.com/line/centraldogma">Fork me at GitHub</a>
+    </div>
+  </div>
+  <script type="text/javascript" src="_static/add_badges.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.3.0/highlightjs-line-numbers.min.js"></script>
+  <script>
+    document.querySelectorAll('div.hljs > pre').forEach(function(block) {
+      hljs.highlightBlock(block);
+      hljs.lineNumbersBlock(block);
+    });
+  </script>
+   
+
+
+</body>
+</html>

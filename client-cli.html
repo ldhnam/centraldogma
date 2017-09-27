@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Command-line client &mdash; Central Dogma 0.25.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Java client library" href="client-java.html" />
+    <link rel="prev" title="Concepts" href="concepts.html" />
+  <script src="_static/center_page.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+   
+
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/central_dogma.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.25
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setting up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command-line client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#path-syntax">Path syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-projects-and-repositories">Creating projects and repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listing-entries">Listing entries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#retrieving-a-file">Retrieving a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modifying-a-repository">Modifying a repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#specifying-a-revision">Specifying a revision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#watching-a-file">Watching a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-the-help-option">Use the <tt class="docutils literal">--help</tt> option</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="client-java.html">Java client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mirroring.html">Better configuration change workflow with Git-to-CD mirroring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auth.html">Authentication and Access Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="known-issues.html">Known issues</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/releases">Release notes</a></li>
+<li class="toctree-l1"><a class="reference external" href="apidocs/index.html#://">API documentation</a></li>
+<li class="toctree-l1"><a class="reference external" href="xref/index.html#://">Source cross-reference</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/issues?q=label%3Aquestion-answered">Questions and answers</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma">Fork me at GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/line/centraldogma/blob/master/CONTRIBUTING.md">Contributing</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Central Dogma</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Command-line client</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/line/centraldogma/blob/master/site/src/sphinx/client-cli.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="command-line-client">
+<span id="client-cli"></span><h1>Command-line client<a class="headerlink" href="#command-line-client" title="Permalink to this headline">¶</a></h1>
+<p>Central Dogma provides a native command-line client <tt class="docutils literal">dogma</tt>, which is located at the <tt class="docutils literal">bin</tt> directory of
+the distribution. You may find it useful to add the <tt class="docutils literal">bin</tt> directory to your <tt class="docutils literal">PATH</tt> environment variable
+so the client is available regardless of your current working directory.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In this tutorial, we assume your Central Dogma server is running at <tt class="docutils literal">localhost:36462</tt>. Unless specified,
+<tt class="docutils literal">dogma</tt> will connect to <tt class="docutils literal">localhost:36462</tt> by default. Use the <tt class="docutils literal">--connect</tt> option to connect to other
+Central Dogma server. e.g. <tt class="docutils literal">--connect dogma.example.com:36462</tt></p>
+</div>
+<div class="section" id="path-syntax">
+<h2>Path syntax<a class="headerlink" href="#path-syntax" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal">dogma</tt> uses a Unix-like path to refer to a project, a repository, a directory or a file. The first and second
+path component signify a project name and a repository name respectively. For example:</p>
+<ul class="simple">
+<li><tt class="docutils literal">foo</tt> - Project <tt class="docutils literal">foo</tt></li>
+<li><tt class="docutils literal">foo/bar</tt> - Repository <tt class="docutils literal">bar</tt> in project <tt class="docutils literal">foo</tt></li>
+<li><tt class="docutils literal">foo/bar/alice</tt> - Directory <tt class="docutils literal">/alice</tt> in repository <tt class="docutils literal">bar</tt> in project <tt class="docutils literal">foo</tt></li>
+<li><tt class="docutils literal">foo/bar/alice/bob.json</tt> - File <tt class="docutils literal">bob.json</tt> under the directory <tt class="docutils literal">/alice</tt></li>
+</ul>
+</div>
+<div class="section" id="creating-projects-and-repositories">
+<h2>Creating projects and repositories<a class="headerlink" href="#creating-projects-and-repositories" title="Permalink to this headline">¶</a></h2>
+<p>Use the <tt class="docutils literal">new</tt> command to create a project:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash"># Create two projects.
+$ dogma new projFoo
+Created: /projFoo
+$ dogma new projBar
+Created: /projBar</pre></div>
+</div>
+<p><tt class="docutils literal">new</tt> command is also used for creating a repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma new projFoo/repoA
+Created: /projFoo/repoA</pre></div>
+</div>
+</div>
+<div class="section" id="listing-entries">
+<h2>Listing entries<a class="headerlink" href="#listing-entries" title="Permalink to this headline">¶</a></h2>
+<p>Use the <tt class="docutils literal">ls</tt> command to list projects, repositories or files.</p>
+<p>To list projects, specify no arguments:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma ls
+[
+  {
+    &quot;name&quot;: &quot;projFoo&quot;,
+    &quot;creator&quot;: {
+      &quot;name&quot;: &quot;System&quot;,
+      &quot;email&quot;: &quot;system@localhost.localdomain&quot;
+    },
+    &quot;url&quot;: &quot;/api/v1/projects/projFoo&quot;,
+    &quot;createdAt&quot;: &quot;2018-03-27T12:36:00Z&quot;
+  },
+  {
+    &quot;name&quot;: &quot;projBar&quot;,
+    &quot;creator&quot;: {
+      &quot;name&quot;: &quot;System&quot;,
+      &quot;email&quot;: &quot;system@localhost.localdomain&quot;
+    },
+    &quot;url&quot;: &quot;/api/v1/projects/projBar&quot;,
+    &quot;createdAt&quot;: &quot;2018-03-26T02:27:26Z&quot;
+  }
+]</pre></div>
+</div>
+<p>To list repositories, specify a project name:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma ls projFoo
+[
+  {
+    &quot;name&quot;: &quot;repoA&quot;,
+    &quot;creator&quot;: {
+      &quot;name&quot;: &quot;System&quot;,
+      &quot;email&quot;: &quot;system@localhost.localdomain&quot;
+    },
+    &quot;headRevision&quot;: 1,
+    &quot;url&quot;: &quot;/api/v1/projects/projFoo/repos/repoA&quot;,
+    &quot;createdAt&quot;: &quot;2018-03-27T12:36:00Z&quot;
+  },
+  ...
+]</pre></div>
+</div>
+<p>To list files or directories in a repository, specify a project name, a repository name and more.
+But before that, let’s add a sample file to use under <tt class="docutils literal">samples</tt> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ echo &#x27;{&quot;a&quot;:&quot;b&quot;}&#x27; &gt; a.json
+
+$ dogma put projFoo/repoA/samples/a.json a.json -m &quot;Add a.json&quot;
+Put: /projFoo/repoA/samples/a.json</pre></div>
+</div>
+<p>We will learn more about adding and editing files in a repository later in the section <a class="reference internal" href="#modifying-repository"><span class="std std-ref">Modifying a repository</span></a>.</p>
+<p>Then, list the directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma ls projFoo/repoA/samples
+[
+  {
+    &quot;path&quot;: &quot;/samples/a.json&quot;,
+    &quot;type&quot;: &quot;JSON&quot;,
+    &quot;url&quot;: &quot;/api/v1/projects/projFoo/repos/repoA/samples/a.json&quot;
+  }
+]</pre></div>
+</div>
+</div>
+<div class="section" id="retrieving-a-file">
+<h2>Retrieving a file<a class="headerlink" href="#retrieving-a-file" title="Permalink to this headline">¶</a></h2>
+<p>Use the <tt class="docutils literal">cat</tt> command to retrieve the content of a file:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma cat projFoo/repoA/samples/a.json
+{
+  &quot;a&quot;: &quot;b&quot;
+}</pre></div>
+</div>
+<p>You can also query a JSON file using JSON path with a flag <tt class="docutils literal">--jsonpath</tt> or simply <tt class="docutils literal">-j</tt>:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma cat --jsonpath &#x27;$.a&#x27; projFoo/repoA/samples/a.json
+&quot;b&quot;</pre></div>
+</div>
+<p>You can use multiple JSON paths as well:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma cat -j &#x27;$[?(@.a != &quot;notMyValue&quot;)]&#x27; -j &#x27;$[0].a&#x27; projFoo/repoA/samples/a.json
+&quot;b&quot;</pre></div>
+</div>
+<p>Alternatively, you can use the <tt class="docutils literal">get</tt> command to download the file:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma get projFoo/repoA/samples/a.json
+Downloaded: bar.json</pre></div>
+</div>
+</div>
+<div class="section" id="modifying-a-repository">
+<span id="modifying-repository"></span><h2>Modifying a repository<a class="headerlink" href="#modifying-a-repository" title="Permalink to this headline">¶</a></h2>
+<p>You can add, edit or remove an individual file in a repository using <tt class="docutils literal">put</tt>, <tt class="docutils literal">edit</tt> and <tt class="docutils literal">rm</tt> command.</p>
+<p>First, let’s create a JSON file and add it:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ echo &#x27;[1, 2, 3]&#x27; &gt; three.json
+
+$ dogma put projFoo/repoA/numbers/3.json three.json
+Put: /projFoo/repoA/numbers/3.json</pre></div>
+</div>
+<p>The command above uploads <tt class="docutils literal">three.json</tt> as <tt class="docutils literal">3.json</tt> under <tt class="docutils literal">/projFoo/repoA/numbers/</tt>.</p>
+<p>If you don’t specify the file name, the file name will be attached automatically. For example,
+if you do <tt class="docutils literal">dogma put projFoo/repoA/numbers/ three.json</tt>, then <tt class="docutils literal">/projFoo/repoA/numbers/three.json</tt> will be added.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A trailing ‘/’ has important meaning in a <tt class="docutils literal">put</tt> command. A path ends with a ‘/’ refers to a directory.
+On the other hand, a path that does not end with a ‘/’ refers to a file. For example,
+<tt class="docutils literal">dogma put /projFoo/repoA/a.txt/ b.txt</tt> will upload <tt class="docutils literal">/projFoo/repoA/a.txt/b.txt</tt>,
+because of the trailing ‘/’ after <tt class="docutils literal">a.txt</tt>.</p>
+</div>
+<p>And then, check it out:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma cat projFoo/repoA/numbers/3.json
+[
+  1,
+  2,
+  3
+]</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When you make a change, you’ll be prompted to enter a commit message via a text editor such as <tt class="docutils literal">vim</tt>.
+If you want to simply add a commit message, use the <tt class="docutils literal">--message</tt> option.</p>
+</div>
+<p>With the <tt class="docutils literal">edit</tt> command, you can edit a file using a text editor:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma edit projFoo/repoA/numbers/3.json
+... Text editor shows up ...</pre></div>
+</div>
+<p>Use the <tt class="docutils literal">rm</tt> command to remove a file:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma rm projFoo/repoA/samples/foo.txt
+Removed: /projFoo/repoA/samples/foo.txt</pre></div>
+</div>
+</div>
+<div class="section" id="specifying-a-revision">
+<h2>Specifying a revision<a class="headerlink" href="#specifying-a-revision" title="Permalink to this headline">¶</a></h2>
+<p>Most commands have an option called <tt class="docutils literal">--revision</tt> which makes the commands retrieve a file at a specific
+revision. If not specified, the client assumes <tt class="docutils literal">-1</tt> which means the latest revision in the repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma cat --revision -1 projFoo/repoA/numbers/3.json
+... Success ...
+$ dogma cat --revision 1 projFoo/repoA/numbers/3.json
+... Failure, because 3.json does not exist at revision 1 ...</pre></div>
+</div>
+</div>
+<div class="section" id="watching-a-file">
+<h2>Watching a file<a class="headerlink" href="#watching-a-file" title="Permalink to this headline">¶</a></h2>
+<p>You can be noticed when a file on the Central Dogma server is changed using the <tt class="docutils literal">watch</tt> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma watch --revision 8 projFoo/repoA/numbers/3.json
+Watcher noticed updated file: projFoo/repoA/numbers/3.json, rev=9
+Content: ...</pre></div>
+</div>
+<p>The <tt class="docutils literal">revision</tt> option represents that you want to watch the change of the file after the revision.
+If you want to keep watching it, use <tt class="docutils literal">--streaming</tt> option:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">$ dogma watch --revision 8 --streaming projFoo/repoA/numbers/3.json
+Watcher noticed updated file: projFoo/repoA/numbers/3.json, rev=9
+Content: ...
+Watcher noticed updated file: projFoo/repoA/numbers/3.json, rev=10
+Content: ...
+Watcher noticed updated file: projFoo/repoA/numbers/3.json, rev=11
+Content: ...
+
+// press CTRL+C
+Received an interrupt, stopping watcher...</pre></div>
+</div>
+</div>
+<div class="section" id="use-the-help-option">
+<h2>Use the <tt class="docutils literal">--help</tt> option<a class="headerlink" href="#use-the-help-option" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal">dogma</tt> client provides more commands and features than what’s demonstrated in this tutorial. <tt class="docutils literal">--help</tt>
+option will show the full usage of the client:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">NAME:
+   Central Dogma - Central Dogma client
+
+USAGE:
+   dogma command [arguments]
+
+COMMANDS:
+     ls         Lists the projects, repositories or files
+     new        Creates a project or repository
+     put        Puts a file to the repository
+     edit       Edits a file in the path
+     get        Downloads a file in the path
+     cat        Prints a file in the path
+     rm         Removes a file in the path
+     watch      Watches a file in the path
+     diff       Gets diff of given path
+     log        Shows commit logs of the path
+     normalize  Normalizes a revision into an absolute revision
+     help, h    Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --connect value, -c value   Specifies host or IP address with port to connect to:[hostname:port] or [http://hostname:port]
+   --username value, -u value  Specifies the username to log in as
+   --token value, -t value     Specifies an authorization token to access resources on the server
+   --help, -h                  Shows help</pre></div>
+</div>
+<p>Appending the <tt class="docutils literal">--help</tt> option after a command will print the detailed usage for the command:</p>
+<div class="highlight-bash notranslate"><div class="highlight hljs"><pre class="bash">DESCRIPTION:
+   Lists the projects, repositories or files
+
+USAGE:
+   dogma ls [command options] [&lt;project_name&gt;[/&lt;repository_name&gt;[/&lt;path&gt;]]]
+
+OPTIONS:
+   --revision value, -r value  Specifies the revision to operate</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="client-java.html" class="btn btn-neutral float-right" title="Java client library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="concepts.html" class="btn btn-neutral" title="Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2018, LINE Corporation.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.25.0',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script>
+  <div class="github-fork-ribbon-wrapper right">
+    <div class="github-fork-ribbon">
+      <a href="https://github.com/line/centraldogma">Fork me at GitHub</a>
+    </div>
+  </div>
+  <script type="text/javascript" src="_static/add_badges.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.3.0/highlightjs-line-numbers.min.js"></script>
+  <script>
+    document.querySelectorAll('div.hljs > pre').forEach(function(block) {
+      hljs.highlightBlock(block);
+      hljs.lineNumbersBlock(block);
+    });
+  </script>
+   
+
+
+</body>
+</html>
